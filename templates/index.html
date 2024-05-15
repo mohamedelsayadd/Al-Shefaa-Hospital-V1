@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--========== BOX ICONS ==========-->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+        <!--========== CSS ==========-->
+        <link rel="stylesheet" href="../static/style.css">
+        
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+        
+        
+
+        <title>Al-Shefaa Hospital</title>
+    </head>
+    <body>
+
+        <!--========== SCROLL TOP ==========-->
+        <a href="#" class="scrolltop" id="scroll-top">
+            <i class='bx bx-chevron-up scrolltop__icon'></i>
+        </a>
+
+        <!--========== HEADER ==========-->
+        <style>
+            .l-header {
+                background-color: black;
+                /* Add any other styling you want for the header */
+            }
+        </style>
+        
+        <header class="l-header" id="header">
+            <nav class="nav bd-container">
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="#home" class="nav__link active-link">Home</a></li>
+                        <li class="nav__item"><a href="#Diabetest" class="nav__link">Diabetes</a></li>
+                        <li class="nav__item"><a href="#Breast Cancer" class="nav__link">Breast Cancer</a></li>
+                        <li class="nav__item"><a href="#Hepatitis C" class="nav__link">Hepatitis C</a></li>
+                        <li class="nav__item"><a href="#Alzheimer" class="nav__link">Alzheimer</a></li>
+                        <li><i class='bx bx-moon change-theme' id="theme-button"></i></li>
+                    </ul>
+                </div>
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
+        
+
+        <main class="l-main">
+            <!--========== HOME ==========-->
+            <section class="home" id="home">
+                <div class="home__container bd-container bd-grid">
+                    <div class="home__data">
+                        <h1 class="home__title">AL-Shefaa Hospital</h1>
+                        <h2 class="home__subtitle">The first virtual hospital powered by artificial intelligence</h2>
+                    </div>
+                    <img src="/static/doctor.png" alt="the Dr" class="home__img">
+                </div>
+                
+            </section>
+            
+            <!--========== Diabetes ==========-->
+<section class="about section bd-container" id="Diabetest">
+                       
+    <form class="form3" id="predictionForm" action="/predict_diabetes" method="post">
+        <h1>Diabetes</h1>
+        <br>
+        <label for="pregnancies">Pregnancies:</label>
+        <br>
+        <input type="number" id="pregnancies" name="pregnancies" required>
+        
+        <br>
+        <label for="glucose">Glucose:</label>
+        <br>
+        <input type="number" id="glucose" name="glucose" required>
+        <br>
+        <label for="blood_pressure">Blood Pressure:</label>
+        <br>
+        <input type="number" id="blood_pressure" name="blood_pressure" required>
+        <br>
+        <label for="skin_thickness">Skin Thickness:</label>
+        <br>
+        <input type="number" id="skin_thickness" name="skin_thickness" required>
+        <br>
+        <label for="insulin">Insulin:</label>
+        <br>
+        <input type="number" id="insulin" name="insulin" required>
+        <br>
+        <label for="bmi">BMI:</label>
+        <br>
+        <input type="number" id="bmi" name="bmi" required>
+        <br>
+        <label for="diabetes_pedigree_function">Diabetes Pedigree Function:</label>
+        <br>
+        <input type="number" id="diabetes_pedigree_function" name="diabetes_pedigree_function" required>
+        <br>
+        <label for="age">Age:</label>
+        <br>
+        <input type="number" id="age" name="age" required>
+        <br>
+        <br>
+    
+        <input class="Btn" type="button" value="diagnose" onclick="submitForm()">
+    </form>
+    
+    <script>
+        function submitForm() {
+            var form = document.getElementById("predictionForm");
+            var formData = new FormData(form);
+    
+            fetch('/predict_diabetes', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                var result = data.result;
+                var icon = 'info'; // Default icon is 'info'
+
+            // Check prediction result and set icon accordingly
+            if (result == 'you have diabetes, visit your doctor as soon as possible') {
+                icon = 'error';
+            } else {
+                icon = 'success';
+            }
+    
+                // Use SweetAlert for displaying the prediction result
+                Swal.fire({
+                    text: result,
+                    icon: icon,
+                    confirmButtonText: 'OK'
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+    
+    
+
+                        
+</section>
+                    
+                
+            
+
+            <!--========== Breast Canser ==========-->
+            <section class="services section bd-container" id="Breast Cancer">
+                
+                <form action="/predict_breast_cancer" method="post" id="cancerPredictionForm">
+                    <h1>Breast Cancer Prediction</h1>
+                    <label for="radius_mean">Radius Mean:</label><br>
+                    <input type="text" id="radius_mean" name="radius_mean" required><br>
+                    <label for="texture_mean">Texture Mean:</label><br>
+                    <input type="text" id="texture_mean" name="texture_mean" required><br>
+                    <label for="perimeter_mean">Perimeter Mean:</label><br>
+                    <input type="text" id="perimeter_mean" name="perimeter_mean" required><br>
+                    <label for="area_mean">Area Mean:</label><br>
+                    <input type="text" id="area_mean" name="area_mean" required><br>
+                    <label for="smoothness_mean">Smoothness Mean:</label><br>
+                    <input type="text" id="smoothness_mean" name="smoothness_mean" required><br>
+                    <label for="compactness_mean">Compactness Mean:</label><br>
+                    <input type="text" id="compactness_mean" name="compactness_mean" required><br>
+                    <label for="concavity_mean">Concavity Mean:</label><br>
+                    <input type="text" id="concavity_mean" name="concavity_mean" required><br>
+                    <label for="concave_points_mean">Concave Points Mean:</label><br>
+                    <input type="text" id="concave_points_mean" name="concave_points_mean" required><br>
+                    <label for="symmetry_mean">Symmetry Mean:</label><br>
+                    <input type="text" id="symmetry_mean" name="symmetry_mean" required><br>
+                    <label for="fractal_dimension_mean">Fractal Dimension Mean:</label><br>
+                    <input type="text" id="fractal_dimension_mean" name="fractal_dimension_mean" required><br>
+                    <label for="radius_se">Radius SE:</label><br>
+                    <input type="text" id="radius_se" name="radius_se" required><br>
+                    <label for="texture_se">Texture SE:</label><br>
+                    <input type="text" id="texture_se" name="texture_se" required><br>
+                    <label for="perimeter_se">Perimeter SE:</label><br>
+                    <input type="text" id="perimeter_se" name="perimeter_se" required><br>
+                    <label for="area_se">Area SE:</label><br>
+                    <input type="text" id="area_se" name="area_se" required><br>
+                    <label for="smoothness_se">Smoothness SE:</label><br>
+                    <input type="text" id="smoothness_se" name="smoothness_se" required><br>
+                    <label for="compactness_se">Compactness SE:</label><br>
+                    <input type="text" id="compactness_se" name="compactness_se" required><br>
+                    <label for="concavity_se">Concavity SE:</label><br>
+                    <input type="text" id="concavity_se" name="concavity_se" required><br>
+                    <label for="concave_points_se">Concave Points SE:</label><br>
+                    <input type="text" id="concave_points_se" name="concave_points_se" required><br>
+                    <label for="symmetry_se">Symmetry SE:</label><br>
+                    <input type="text" id="symmetry_se" name="symmetry_se" required><br>
+                    <label for="fractal_dimension_se">Fractal Dimension SE:</label><br>
+                    <input type="text" id="fractal_dimension_se" name="fractal_dimension_se" required><br>
+                    <label for="radius_worst">Radius Worst:</label><br>
+                    <input type="text" id="radius_worst" name="radius_worst" required><br>
+                    <label for="texture_worst">Texture Worst:</label><br>
+                    <input type="text" id="texture_worst" name="texture_worst" required><br>
+                    <label for="perimeter_worst">Perimeter Worst:</label><br>
+                    <input type="text" id="perimeter_worst" name="perimeter_worst" required><br>
+                    <label for="area_worst">Area Worst:</label><br>
+                    <input type="text" id="area_worst" name="area_worst" required><br>
+                    <label for="smoothness_worst">Smoothness Worst:</label><br>
+                    <input type="text" id="smoothness_worst" name="smoothness_worst" required><br>
+                    <label for="compactness_worst">Compactness Worst:</label><br>
+                    <input type="text" id="compactness_worst" name="compactness_worst" required><br>
+                    <label for="concavity_worst">Concavity Worst:</label><br>
+                    <input type="text" id="concavity_worst" name="concavity_worst" required><br>
+                    <label for="concave_points_worst">Concave Points Worst:</label><br>
+                    <input type="text" id="concave_points_worst" name="concave_points_worst" required><br>
+                    <label for="symmetry_worst">Symmetry Worst:</label><br>
+                    <input type="text" id="symmetry_worst" name="symmetry_worst" required><br>
+                    <label for="fractal_dimension_worst">Fractal Dimension Worst:</label><br>
+                    <input type="text" id="fractal_dimension_worst" name="fractal_dimension_worst" required><br><br>
+                    <input class="Btn" type="button" value="diagnose" onclick="submitCancerForm()">
+                </form>
+                
+                <script>
+                    function submitCancerForm() {
+                        var form = document.getElementById("cancerPredictionForm");
+                        var formData = new FormData(form);
+                
+                        fetch('/predict_breast_cancer', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            var result = data.result;
+                            var icon = 'info'; // Default icon is 'info'
+
+            // Check prediction result and set icon accordingly
+            if (result !== "Good news, You do not have breast cancer.") {
+                icon = 'error';
+            } else {
+                icon = 'success';
+            }
+            
+                
+                            // Use SweetAlert for displaying the prediction result
+                            Swal.fire({
+                                text: result,
+                                icon: icon,
+                                confirmButtonText: 'OK'
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                    }
+                </script>
+            </section>
+
+            <!--========== Liver diseases ==========-->
+            <section class="menu section bd-container" id="Hepatitis C">
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+<body>
+
+<form action="/predict_hepatitis" method="post" id="hepatitisPredictionForm">
+    <h1>Hepatitis C Prediction</h1>
+    <label for="age">Age:</label><br>
+    <input type="number" id="age" name="age" required><br>
+    <label for="sex">Sex:</label><br>
+    <select id="sex" name="sex" required>
+        <option value="0">Female</option>
+        <option value="1">Male</option>
+    </select><br>
+    <label for="alb">ALB:</label><br>
+    <input type="number" id="alb" name="alb" required><br>
+    <label for="alp">ALP:</label><br>
+    <input type="number" id="alp" name="alp" required><br>
+    <label for="alt">ALT:</label><br>
+    <input type="number" id="alt" name="alt" required><br>
+    <label for="ast">AST:</label><br>
+    <input type="number" id="ast" name="ast" required><br>
+    <label for="bil">BIL:</label><br>
+    <input type="number" id="bil" name="bil" required><br>
+    <label for="che">CHE:</label><br>
+    <input type="number" id="che" name="che" required><br>
+    <label for="chol">CHOL:</label><br>
+    <input type="number" id="chol" name="chol" required><br>
+    <label for="crea">CREA:</label><br>
+    <input type="number" id="crea" name="crea" required><br>
+    <label for="ggt">GGT:</label><br>
+    <input type="number" id="ggt" name="ggt" required><br>
+    <label for="prot">PROT:</label><br>
+    <input type="number" id="prot" name="prot" required><br>
+    <br>
+    <input class="Btn" type="button" value="diagnose" onclick="submitHepatitisForm()">
+</form>
+
+<script>
+    function submitHepatitisForm() {
+        var form = document.getElementById("hepatitisPredictionForm");
+        var formData = new FormData(form);
+
+        fetch('/predict_hepatitis', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            var result = data.result;
+            var icon = 'info'; // Default icon is 'info'
+
+            // Check prediction result and set icon accordingly
+            if (result !== "You are not sick.") {
+                icon = 'error';
+            } else {
+                icon = 'success';
+            }
+            
+
+            // Use SweetAlert for displaying the prediction result with the appropriate icon
+            Swal.fire({
+                text: result,
+                icon: icon,
+                confirmButtonText: 'OK'
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+
+                   
+            </section>
+
+           
+           
+
+            <!--========== AlZhaimer ==========-->
+            <section class="contact section bd-container" id="Alzheimer">
+                <<form action="/predict_alzheimer" method="post" enctype="multipart/form-data" id="alzheimerPredictionForm">
+                    <h1>Alzheimer's Prediction</h1>
+                    <label for="image">Upload MRI Image:</label><br>
+                    <input type="file" id="image" name="file" accept=".jpg, .jpeg, .png" required><br>
+                    <br>
+                    <input class="Btn" type="button" value="diagnose" onclick="submitAlzheimerForm()">
+                </form>
+                
+                <div class="message">
+                    {% if alzheimer_prediction %}
+                        <p>{{ alzheimer_prediction }}</p>
+                    {% endif %}
+                </div>
+                
+                <script>
+                    function submitAlzheimerForm() {
+                        var form = document.getElementById("alzheimerPredictionForm");
+                        var formData = new FormData(form);
+                
+                        fetch('/predict_alzheimer', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            var result = data.result;
+                            var icon = 'info'; // Default icon is 'info'
+
+            // Check prediction result and set icon accordingly
+            if (result !== "MRI diagnosis is: Non Dementia") {
+                icon = 'error';
+            } else {
+                icon = 'success';
+            }
+            
+                
+                            // Use SweetAlert for displaying the prediction result
+                            Swal.fire({
+                                text: result,
+                                icon: 'info',
+                                confirmButtonText: 'OK'
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                    }
+                </script>
+            </section>
+        </main>
+
+        <!--========== FOOTER ==========-->
+
+        <!--========== SCROLL REVEAL ==========-->
+        <script src="https://unpkg.com/scrollreveal"></script>
+
+        <!--========== MAIN JS ==========-->
+        <script src="../static/main.js"></script>
+    </body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
