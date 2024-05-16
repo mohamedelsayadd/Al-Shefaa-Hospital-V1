@@ -18,7 +18,7 @@ To set up AL - Shefaa Hospital on your local machine, follow these steps:
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/mohamedelsayadd/Al-Shefaa-hospital.git
+   git clone https://github.com/mohamedelsayadd/Al-Shefaa-hospital-V1.git
    ```
 
 2. Navigate to the project directory:
