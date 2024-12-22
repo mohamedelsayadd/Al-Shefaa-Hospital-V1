@@ -3,7 +3,7 @@
 AL - Shefaa Hospital is an AI-powered disease diagnosis system utilizing machine learning and deep learning models. It is capable of diagnosing four diseases: diabetes, breast cancer, liver disease, and Alzheimer's. The system offers a user-friendly web interface for easy interaction. 🤖🔬
 
 ## Website Screenshot
-![AL-Shefaa Hospital Interface]([AL-Shefaa Hospital screenshot.png](https://github.com/mohamedelsayadd/Al-Shefaa-Hospital-V1/blob/main/AL-Shefaa%20Hospital%20screenshot.png))
+![AL-Shefaa Hospital Interface](AL-Shefaa%20Hospital%20screenshot.png)
 *Website interface showing the main diagnosis dashboard*
 
 ## Table of Contents 📋
